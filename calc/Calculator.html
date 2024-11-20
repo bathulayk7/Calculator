@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="Calculator.css" />
+    <link
+    rel="icon"
+    href="I:\TEJA-work-school\calc\Image.avif"
+    type="image/x-icon"
+  />
+  </head>
+  <body>
+    <div class="container">
+      <div class="display">
+        <input id="screen" type="text" placeholder="0" />
+      </div>
+
+      <div class="btns">
+        <div class="row">
+          <button class="btn">(</button>
+          <button class="btn">)</button>
+          <button class="btn" onclick="e()">e</button>
+          <button class="btn">%</button>
+          <button id="ce" onclick="backspc()">CE</button>
+          <button id="ac" onclick="screen.value=''">AC</button>
+        </div>
+
+        <div class="row">
+          <button onclick="sin()">sin</button>
+          <button onclick="fact()">x!</button>
+          <button class="btn">7</button>
+          <button class="btn">8</button>
+          <button class="btn">9</button>
+          <button id="sy" class="btn">÷</button>
+        </div>
+
+        <div class="row">
+          <button onclick="cos()">cos</button>
+          <button onclick="pi()">π</button>
+          <button class="btn">4</button>
+          <button class="btn">5</button>
+          <button class="btn">6</button>
+          <button id="sy" class="btn">×</button>
+        </div>
+
+        <div class="row">
+          <button onclick="tan()">tan</button>
+          <button onclick="log()">log</button>
+          <button class="btn">1</button>
+          <button class="btn">2</button>
+          <button class="btn">3</button>
+          <button id="sy" class="btn">-</button>
+        </div>
+
+        <div class="row">
+          <button onclick="sqrt()">√</button>
+          <button onclick="power()">
+            x
+            <span style="position: relative; bottom: 0.4em; right: 0.1em"
+              >y</span
+            >
+          </button>
+          <button class="btn">.</button>
+          <button class="btn">0</button>
+          <button id="eval" onclick="evaluateExpression()">=</button>
+          <button id="sy" class="btn">+</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    var screen = document.querySelector("#screen");
+    var btn = document.querySelectorAll(".btn");
+
+    for (item of btn) {
+      item.addEventListener("click", (e) => {
+        btntext = e.target.innerText;
+
+        if (btntext == "×") {
+          btntext = "*";
+        }
+
+        if (btntext == "÷") {
+          btntext = "/";
+        }
+
+        screen.value += btntext;
+      });
+    }
+
+    function sin() {
+      const screen = document.getElementById("screen");
+      let value = parseFloat(screen.value);
+
+      if (isNaN(value)) {
+        screen.value = "Error";
+        return;
+      }
+      const degree = (value * Math.PI) / 180;
+      screen.value = Math.sin(degree).toFixed(3);
+    }
+
+    function cos() {
+      const screen = document.getElementById("screen");
+      let value = parseFloat(screen.value);
+
+      if (isNaN(value)) {
+        screen.value = "Error";
+        return;
+      }
+      const degree = (value * Math.PI) / 180;
+      screen.value = Math.cos(degree).toFixed(3);
+    }
+
+    function tan() {
+      const screen = document.getElementById("screen");
+      let value = parseFloat(screen.value);
+
+      if (isNaN(value)) {
+        screen.value = "Error";
+        return;
+      }
+      const degree = (value * Math.PI) / 180;
+      screen.value = Math.tan(degree).toFixed(3);
+    }
+
+    function power() {
+      const screen = document.getElementById("screen");
+      let expression = screen.value.trim();
+      const powerPattern = /^(\d+(\.\d+)?)\^(\d+(\.\d+)?)$/;
+      const match = expression.match(powerPattern);
+
+      if (match) {
+        const x = parseFloat(match[1]);
+        const y = parseFloat(match[3]);
+
+        screen.value = Math.pow(x, y);
+      } else {
+        screen.value = "Error";
+      }
+    }
+
+    function sqrt() {
+    const screen = document.getElementById("screen");
+    let expression = screen.value.trim();
+    let value = parseFloat(screen.value);
+
+    if (isNaN(value)) {
+        screen.value = "Error";
+        return;
+    }
+
+    if (value < 0) {
+        screen.value = "Error";
+        return;
+    }
+    const result = Math.sqrt(value);
+    screen.value = result.toFixed(5);
+}
+
+
+    function log() {
+      const screen = document.getElementById("screen");
+      let value = parseFloat(screen.value);
+
+      if (isNaN(value) || value <= 0) {
+        screen.value = "Error";
+        return;
+      }
+
+      const result = Math.log10(value);
+
+      screen.value = result.toFixed(5);
+    }
+
+    function pi() {
+      const screen = document.getElementById("screen");
+      screen.value *= Math.PI.toFixed(10);
+      let expression = screen.value.trim();
+      const powerPattern = /^(\d+(\.\d+)?)\pi(\d+(\.\d+)?)$/;
+    }
+
+    function e() {
+      screen.value *= 2.71828182846;
+      let expression = screen.value.trim();
+      if (isNaN(value) || value <= 0) {
+        screen.value = "Error";
+        return;
+      }
+    }
+
+    function power() {
+      const screen = document.getElementById("screen");
+      screen.value += "^";
+      if (isNaN(value)) {
+        screen.value = "Error";
+        return;
+      }
+    }
+
+    function fact() {
+      const screen = document.getElementById("screen");
+      screen.value += "!";
+      if (isNaN(value) ) {
+        screen.value = "Error";
+        return;
+      }
+    }
+
+    function factorial(n) {
+      if (n === 0 || n === 1) return 1;
+      let result = 1;
+      for (let i = 2; i <= n; i++) {
+        result *= i;
+      }
+      return result;
+    }
+
+    function backspc() {
+      screen.value = screen.value.substr(0, screen.value.length - 1);
+    }
+
+    function evaluateExpression() {
+      const screen = document.getElementById("screen");
+      let expression = screen.value;
+
+      expression = expression.replace(/(\d+)!/g, (match, num) => {
+        return factorial(parseInt(num));
+      });
+
+      const invalidPatterns = /[\+\-\*\/]{2,}|[^\d\+\-\*\%\/\(\)\.\^]/g;
+      if (!expression || invalidPatterns.test(expression)) {
+        screen.value = "Error";
+        return;
+      }
+      expression = expression.replace(/\^/g, "**");
+      try {
+        screen.value = eval(expression);
+      } catch (error) {
+        screen.value = "Error";
+      }
+    }
+  </script>
+</html>
