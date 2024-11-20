@@ -6,10 +6,10 @@
     <title>Scientific Calculator</title>
     <link rel="stylesheet" href="new.css" />
     <link
-      rel="icon"
-      href="I:\TEJA-work-school\calc\icon.jpg"
-      type="image/x-icon"
-    />
+    rel="icon"
+    href="I:\TEJA-work-school\calc\Image.avif"
+    type="image/x-icon"
+  />
   </head>
   <body>
     <div class="container">
@@ -19,9 +19,9 @@
 
       <div class="btns">
         <div class="row">
-          <button onclick="fact()">x!</button>
           <button class="btn">(</button>
           <button class="btn">)</button>
+          <button class="btn" onclick="e()">e</button>
           <button class="btn">%</button>
           <button id="ce" onclick="backspc()">CE</button>
           <button id="ac" onclick="screen.value=''">AC</button>
@@ -29,7 +29,7 @@
 
         <div class="row">
           <button onclick="sin()">sin</button>
-          <button onclick="pi()">π</button>
+          <button onclick="fact()">x!</button>
           <button class="btn">7</button>
           <button class="btn">8</button>
           <button class="btn">9</button>
@@ -38,7 +38,7 @@
 
         <div class="row">
           <button onclick="cos()">cos</button>
-          <button onclick="log()">log</button>
+          <button onclick="pi()">π</button>
           <button class="btn">4</button>
           <button class="btn">5</button>
           <button class="btn">6</button>
@@ -47,7 +47,7 @@
 
         <div class="row">
           <button onclick="tan()">tan</button>
-          <button onclick="sqrt()">√</button>
+          <button onclick="log()">log</button>
           <button class="btn">1</button>
           <button class="btn">2</button>
           <button class="btn">3</button>
@@ -55,15 +55,15 @@
         </div>
 
         <div class="row">
-          <button onclick="e()">e</button>
+          <button onclick="sqrt()">√</button>
           <button onclick="power()">
             x
             <span style="position: relative; bottom: 0.4em; right: 0.1em"
               >y</span
             >
           </button>
-          <button class="btn">0</button>
           <button class="btn">.</button>
+          <button class="btn">0</button>
           <button id="eval" onclick="evaluateExpression()">=</button>
           <button id="sy" class="btn">+</button>
         </div>
@@ -143,8 +143,23 @@
     }
 
     function sqrt() {
-      screen.value = Math.sqrt(screen.value, 2);
+    const screen = document.getElementById("screen");
+    let expression = screen.value.trim();
+    let value = parseFloat(screen.value);
+
+    if (isNaN(value)) {
+        screen.value = "Error";
+        return;
     }
+
+    if (value < 0) {
+        screen.value = "Error";
+        return;
+    }
+    const result = Math.sqrt(value);
+    screen.value = result.toFixed(5);
+}
+
 
     function log() {
       const screen = document.getElementById("screen");
@@ -170,17 +185,28 @@
     function e() {
       screen.value *= 2.71828182846;
       let expression = screen.value.trim();
-      const powerPattern = /e(\d+(\.\d+)?)\e(\d+(\.\d+)?)$/;
+      if (isNaN(value) || value <= 0) {
+        screen.value = "Error";
+        return;
+      }
     }
 
     function power() {
       const screen = document.getElementById("screen");
       screen.value += "^";
+      if (isNaN(value)) {
+        screen.value = "Error";
+        return;
+      }
     }
 
     function fact() {
       const screen = document.getElementById("screen");
       screen.value += "!";
+      if (isNaN(value) ) {
+        screen.value = "Error";
+        return;
+      }
     }
 
     function factorial(n) {
