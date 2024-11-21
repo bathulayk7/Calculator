@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scientific Calculator</title>
     <link rel="stylesheet" href="new.css" />
-    <link
-    rel="icon"
-    href="I:\TEJA-work-school\calc\Image.avif"
-    type="image/x-icon"
-  />
   </head>
   <body>
+    <h4 class="slide" >JAI SWAMINARAYAN</h4>
+    <h1 class="h1">CALCULATOR</h1>
     <div class="container">
       <div class="display">
         <input id="screen" type="text" placeholder="0" />
@@ -69,6 +66,7 @@
         </div>
       </div>
     </div>
+    <h4 class="h4" >Done by:-TEJA, AF3352 ,9th Grape</h4>
   </body>
   <script>
     var screen = document.querySelector("#screen");
@@ -143,23 +141,22 @@
     }
 
     function sqrt() {
-    const screen = document.getElementById("screen");
-    let expression = screen.value.trim();
-    let value = parseFloat(screen.value);
+      const screen = document.getElementById("screen");
+      let expression = screen.value.trim();
+      let value = parseFloat(screen.value);
 
-    if (isNaN(value)) {
+      if (isNaN(value)) {
         screen.value = "Error";
         return;
-    }
+      }
 
-    if (value < 0) {
+      if (value < 0) {
         screen.value = "Error";
         return;
+      }
+      const result = Math.sqrt(value);
+      screen.value = result.toFixed(5);
     }
-    const result = Math.sqrt(value);
-    screen.value = result.toFixed(5);
-}
-
 
     function log() {
       const screen = document.getElementById("screen");
@@ -203,7 +200,7 @@
     function fact() {
       const screen = document.getElementById("screen");
       screen.value += "!";
-      if (isNaN(value) ) {
+      if (isNaN(value)) {
         screen.value = "Error";
         return;
       }
